@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+
+  jenkins:
+    image: jenkins/jenkins:2.255
+    ports:
+    - "0.0.0.0:9080:8080"
+    user: 502:1001
+    volumes:
+    - ./jenkins_home_on_host:/var/jenkins_home
+    # using a bind mount to the host `./jenkins_home` means I can easily peruse the jenkins_home files without needing to "get into the container"
+    restart: unless-stopped
+    # a named volume is fine too - jenkins_home:/var/jenkins_home
